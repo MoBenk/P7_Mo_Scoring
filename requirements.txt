@@ -1,4 +1,4 @@
-python==3.9.13
+python==3.10.0
 matplotlib==3.4.3
 pandas==1.4.3
 numba==0.53.0
