@@ -36,7 +36,7 @@ def main() :
             informations_client_test =pickle.load(f)
         with open('dossier_pkl/selection_clients.pkl', 'rb') as f:                  
             selection_clients =pickle.load(f)
-        
+            selection_clients=selection_clients.tolist()
         # Jeu de données pour les comparaisons dans la jeu de données Train avec Target
         with open('dossier_pkl/compare_train.pkl', 'rb') as f:                  
             compare_train =pickle.load(f)
