@@ -96,7 +96,7 @@ def main() :
 
     # Chargement des données ……
     informations_client_test, selection_clients, compare_train, compare_client, data_test_std_300_sample, target, train_shap, test_shap, y_shap=chargement_donnees()
-    identifiants_client = selection_clients['ID'].values
+    identifiants_client = selection_clients
     with open('dossier_pkl/clf.pkl', 'rb') as f:                  
          clf =pickle.load(f) 
     prediction_test = predict_model (clf,  probability_threshold = 0.74, data = data_test_std_300_sample)
