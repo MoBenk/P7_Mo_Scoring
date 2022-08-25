@@ -210,7 +210,7 @@ def main() :
         st.subheader("*Revenu (EUROS)*")
         st.write("**Revenu total : **{:.0f}".format(infos_client["AMT_INCOME_TOTAL"].values[0]))
         st.write("**Montant du crédit : **{:.0f}".format(infos_client["AMT_CREDIT"].values[0]))
-        st.write("**Annuités de crédit : **{:.0f}".format(infos_client["AMT_ANNUITY"].values[0]))
+        st.write("**Ratio-Annuités de crédit : **{:.0f}".format(infos_client["CREDIT_ANNUITY_RATIO"].values[0]))
         st.write("**Valeur du bien financé : **{:.0f}".format(infos_client["AMT_GOODS_PRICE"].values[0]))
         
         # Histogramme des revenus
@@ -235,7 +235,7 @@ def main() :
         st.write("**Non Défaillant avec une probabilité de : **{:.0f} %".format(round(float(Score)*100, 2)))
         
     # Dataframe avec l'ensemble des caractérisques du client
-    colonnes_a_afficher = ['CODE_GENDER', 'AGE', 'NAME_FAMILY_STATUS', 'CNT_CHILDREN', 'AMT_INCOME_TOTAL','AMT_CREDIT', 'AMT_ANNUITY','NAME_CONTRACT_TYPE','AMT_GOODS_PRICE', 'WEIGHTED_EXT_SOURCE']
+    colonnes_a_afficher = ['CODE_GENDER', 'AGE', 'NAME_FAMILY_STATUS', 'CNT_CHILDREN', 'AMT_INCOME_TOTAL','AMT_CREDIT', 'CREDIT_ANNUITY_RATIO','NAME_CONTRACT_TYPE','AMT_GOODS_PRICE', 'WEIGHTED_EXT_SOURCE']
     st.markdown("<u>Données du client :</u>", unsafe_allow_html=True)
     st.write(identite_client(informations_client_test[colonnes_a_afficher], verification_identifiant))
 
@@ -300,7 +300,7 @@ def main() :
             mask_0 = compare_client['TARGET'] == 1
             data_compare = compare_client[mask_0 & mask_1 & mask_2 & mask_3 & mask_4 & mask_5 ]
             data_compare = data_compare[[ 'SK_ID_CURR','CODE_GENDER', 'DAYS_BIRTH', 'NAME_FAMILY_STATUS', 'CNT_CHILDREN', 'AMT_INCOME_TOTAL', \
-                                                'AMT_CREDIT', 'AMT_ANNUITY', 'NAME_CONTRACT_TYPE','AMT_GOODS_PRICE', 'WEIGHTED_EXT_SOURCE', 'TARGET']]
+                                                'AMT_CREDIT', 'CREDIT_ANNUITY_RATIO', 'NAME_CONTRACT_TYPE','AMT_GOODS_PRICE', 'WEIGHTED_EXT_SOURCE', 'TARGET']]
             data_compare = data_compare.rename({'DAYS_BIRTH':'AGE'}, axis=1)
             data_compare['AGE'] =  data_compare['AGE'].astype(int)
 
@@ -317,7 +317,7 @@ def main() :
             mask_0 = compare_client['TARGET'] == 0
             data_compare = compare_client[mask_0 & mask_1 & mask_2 & mask_3 & mask_4 & mask_5 ]
             data_compare = data_compare[[ 'SK_ID_CURR','CODE_GENDER', 'DAYS_BIRTH', 'NAME_FAMILY_STATUS', 'CNT_CHILDREN', 'AMT_INCOME_TOTAL', \
-                                                'AMT_CREDIT', 'AMT_ANNUITY', 'NAME_CONTRACT_TYPE','AMT_GOODS_PRICE', 'WEIGHTED_EXT_SOURCE', 'TARGET']]
+                                                'AMT_CREDIT', 'CREDIT_ANNUITY_RATIO', 'NAME_CONTRACT_TYPE','AMT_GOODS_PRICE', 'WEIGHTED_EXT_SOURCE', 'TARGET']]
             data_compare = data_compare.rename({'DAYS_BIRTH':'AGE'}, axis=1)
             data_compare['AGE'] = data_compare['AGE'].astype(int)
 
