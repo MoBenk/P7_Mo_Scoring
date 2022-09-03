@@ -243,29 +243,14 @@ def main() :
     
     if st.checkbox("Identifiant client {:.0f} : caractéristiques importantes.".format(verification_identifiant)):
         shap.initjs()
-        X = train_shap
-        Y=test_shap
-        y = y_shap
-        # créer un split train/test 
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=7)
-        d_train = xgboost.DMatrix(X_train, label=y_train)
-        d_test = xgboost.DMatrix(X_test, label=y_test)
-        # Former le modele
-        params = {
-            "eta": 0.01,
-            "objective": "binary:logistic",
-            "subsample": 0.5,
-            "base_score": float(np.mean(y_train)),
-            "eval_metric": "logloss"
-        }
-        model = xgboost.train(params, d_train, 10000, evals = [(d_test, "test")], verbose_eval=100, early_stopping_rounds=20)
-        
+        # Données shappley_values  pour l'affichage shappley 
+        with open('dossier_pkl/shap_values.pkl', 'rb') as f:    
+            shap_values=pickle.load(f)     
+    
         client_shap = test_shap.loc[[verification_identifiant], : ]
             
         # Interprétation et Affichage du bar plot des features importances
         fig, ax = plt.subplots(figsize=(10, 10))
-        explainer = shap.TreeExplainer(model)
-        shap_values = explainer.shap_values(Y)
         #afficher un widget de curseur
         number = st.slider("Choix du nombre de caratéristiques du client …", 0, 20, 8)
         shap.summary_plot(shap_values, client_shap, max_display=number, plot_type ="bar", color_bar=False)
